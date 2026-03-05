@@ -52,23 +52,22 @@
       max-width: 700px;
     }
     .hero-fluid h1 {
-      color: #ffffff;
+      color: var(--heading-color);
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .hero-fluid .subtitle {
-      color: var(--accent);
+      color: rgba(255,255,255,0.8);
     }
     .hero-fluid .tagline {
       color: rgba(255,255,255,0.85);
     }
     .hero-fluid .hero-cta {
-      background: var(--accent);
-      color: var(--text-primary);
-      border: none;
+      border-color: var(--accent);
+      color: var(--accent);
     }
     .hero-fluid .hero-cta:hover {
-      background: #ffffff;
-      color: var(--text-primary);
+      background: var(--accent);
+      color: #2D3E47;
     }
     @media (max-width: 768px) {
       .hero-fluid {
@@ -95,10 +94,22 @@
       </div>
     </section>
 
+    <!-- Quote Carousel -->
+    <section class="quote-carousel" id="quoteCarousel">
+      <div class="quote-carousel-inner" id="quoteCarouselInner">
+        <!-- Quotes injected by JS -->
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous quote">&#8592;</button>
+        <button class="carousel-pause" id="carouselPause" aria-label="Pause carousel">&#10074;&#10074;</button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next quote">&#8594;</button>
+      </div>
+    </section>
+
     <!-- Chapter Directory Grid with Images -->
     <section class="section">
       <div class="section-wide">
-        <div class="section-title fade-in">Explore the Work</div>
+        <div class="section-title fade-in">Explore by Chapter</div>
         <div class="chapters-grid">
           <a href="chapters/goal.html" class="chapter-card fade-in">
             <img src="images/ch-goal.png" alt="Goal" loading="lazy">
@@ -146,37 +157,14 @@
       </div>
     </section>
 
-    <!-- Quotes Section -->
-    <section class="section section-alt">
-      <div class="section-wide">
-        <div class="section-title fade-in">Voices of a Self-Organizing Universe</div>
-        <div class="quotes-grid">
-          <div class="quote-card fade-in">
-            <p>"To be alive in this beautiful, self-organizing universe — to participate in the dance of life with senses to perceive it, lungs that breathe it, organs that draw nourishment from it — is a wonder beyond words."</p>
-            <div class="attribution">Joanna Macy</div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"The model we choose to use to understand something determines what we find."</p>
-            <div class="attribution">Iain McGilchrist</div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"The tendency to synchronize is one of the most pervasive drives in the universe, extending from atoms to animals, from people to planets."</p>
-            <div class="attribution">Steven Strogatz</div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"Life is inherently intelligent, creative, regenerative, and organizes itself into networks."</p>
-            <div class="attribution">Fritjof Capra</div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"There is more wisdom in your body than in your deepest philosophy."</p>
-            <div class="attribution">Friedrich Nietzsche</div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"We were born for cooperation, like feet, like hands, like eyelids, like the rows of upper and lower teeth."</p>
-            <div class="attribution">Marcus Aurelius</div>
-          </div>
-        </div>
-      </div>
+    <!-- Subscribe Band -->
+    <section class="subscribe-band">
+      <h2>Stay Connected</h2>
+      <p>Sign up to receive news and updates about Systems Philosophy.</p>
+      <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Email address" required aria-label="Email address" />
+        <button type="submit">Subscribe</button>
+      </form>
     </section>
 
     <!-- CTA -->
@@ -186,7 +174,7 @@
         <p class="text-muted mb-3">Discover how synchronizing with nature's self-organizing process can unlock humanity's ultimate potential.</p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
           <a href="watch.html" class="btn-outline" style="border-color:var(--accent);color:var(--accent);">Watch the Film</a>
-          <a href="chapters/goal.html" class="btn-primary" style="background:var(--accent);color:var(--text-primary);text-decoration:none;">Start Reading</a>
+          <a href="chapters/goal.html" class="btn-primary" style="text-decoration:none;color:#313D42;">Start Reading</a>
         </div>
       </div>
     </section>

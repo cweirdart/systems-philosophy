@@ -144,6 +144,62 @@ function buildChapterNav(currentId) {
   return html;
 }
 
+const carouselQuotes = [
+  { text: '"To be alive in this beautiful, self-organizing universe — to participate in the dance of life with senses to perceive it, lungs that breathe it, organs that draw nourishment from it — is a wonder beyond words."', author: 'Joanna Macy' },
+  { text: '"The model we choose to use to understand something determines what we find."', author: 'Iain McGilchrist' },
+  { text: '"The tendency to synchronize is one of the most pervasive drives in the universe, extending from atoms to animals, from people to planets."', author: 'Steven Strogatz' },
+  { text: '"Life is inherently intelligent, creative, regenerative, and organizes itself into networks."', author: 'Fritjof Capra' },
+  { text: '"There is more wisdom in your body than in your deepest philosophy."', author: 'Friedrich Nietzsche' },
+  { text: '"We were born for cooperation, like feet, like hands, like eyelids, like the rows of upper and lower teeth."', author: 'Marcus Aurelius' },
+];
+
+function buildQuoteCarousel() {
+  const container = document.getElementById('quoteCarouselInner');
+  if (!container) return;
+
+  container.innerHTML = carouselQuotes.map((q, i) =>
+    `<div class="quote-slide${i === 0 ? ' active' : ''}" data-index="${i}">
+      <div class="quote-text">${q.text}</div>
+      <div class="quote-attribution">— ${q.author}</div>
+    </div>`
+  ).join('');
+
+  let current = 0;
+  let playing = true;
+  let interval = setInterval(nextSlide, 8000);
+
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  const pauseBtn = document.getElementById('carouselPause');
+
+  function showSlide(idx) {
+    const slides = container.querySelectorAll('.quote-slide');
+    slides.forEach(s => s.classList.remove('active'));
+    slides[idx].classList.add('active');
+    current = idx;
+  }
+
+  function nextSlide() {
+    showSlide((current + 1) % carouselQuotes.length);
+  }
+
+  function prevSlide() {
+    showSlide((current - 1 + carouselQuotes.length) % carouselQuotes.length);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+  if (pauseBtn) pauseBtn.addEventListener('click', () => {
+    playing = !playing;
+    pauseBtn.innerHTML = playing ? '&#10074;&#10074;' : '&#9654;';
+    if (playing) { interval = setInterval(nextSlide, 8000); } else { clearInterval(interval); }
+  });
+
+  function resetInterval() {
+    if (playing) { clearInterval(interval); interval = setInterval(nextSlide, 8000); }
+  }
+}
+
 function init() {
   // Inject header
   const headerEl = document.getElementById('site-header');
@@ -159,6 +215,9 @@ function init() {
     const chapterId = chapterNavEl.dataset.chapter;
     chapterNavEl.innerHTML = buildChapterNav(chapterId);
   }
+
+  // Quote carousel
+  buildQuoteCarousel();
 
   // Mobile hamburger menu
   setupMobileMenu();
