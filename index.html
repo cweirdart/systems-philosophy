@@ -9,13 +9,84 @@
   <meta property="og:description" content="There is a deep simplicity that exists throughout the self-organizing universe…">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero-fluid {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      overflow: hidden;
+      background: #2D3E47;
+    }
+    .hero-fluid canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Static fallback if WebGL unavailable */
+    .hero-fluid .hero-fallback-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/fluid-art.jpg') center/cover no-repeat;
+      opacity: 0.45;
+    }
+    .hero-fluid .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(45, 62, 71, 0.5) 0%,
+        rgba(45, 62, 71, 0.3) 40%,
+        rgba(45, 62, 71, 0.6) 100%
+      );
+      z-index: 1;
+    }
+    .hero-fluid .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+    .hero-fluid h1 {
+      color: #ffffff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero-fluid .subtitle {
+      color: var(--accent);
+    }
+    .hero-fluid .tagline {
+      color: rgba(255,255,255,0.85);
+    }
+    .hero-fluid .hero-cta {
+      background: var(--accent);
+      color: var(--text-primary);
+      border: none;
+    }
+    .hero-fluid .hero-cta:hover {
+      background: #ffffff;
+      color: var(--text-primary);
+    }
+    @media (max-width: 768px) {
+      .hero-fluid {
+        min-height: 65vh;
+        padding: 7rem 1.5rem 3rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
+    <!-- Hero with flowing liquid background -->
+    <section class="hero-fluid">
+      <div class="hero-fallback-bg"></div>
+      <canvas id="fluidCanvas"></canvas>
+      <div class="hero-overlay"></div>
       <div class="hero-content fade-in">
         <h1>Systems Philosophy</h1>
         <div class="subtitle">A Unified Theory</div>
@@ -24,8 +95,59 @@
       </div>
     </section>
 
+    <!-- Chapter Directory Grid with Images -->
+    <section class="section">
+      <div class="section-wide">
+        <div class="section-title fade-in">Explore the Work</div>
+        <div class="chapters-grid">
+          <a href="chapters/goal.html" class="chapter-card fade-in">
+            <img src="images/ch-goal.png" alt="Goal" loading="lazy">
+          </a>
+          <a href="chapters/intro.html" class="chapter-card fade-in">
+            <img src="images/ch-intro.png" alt="Introduction" loading="lazy">
+          </a>
+          <a href="chapters/observation.html" class="chapter-card fade-in">
+            <img src="images/ch-1.png" alt="Chapter 1: Observation" loading="lazy">
+          </a>
+          <a href="chapters/nonlinear-networks.html" class="chapter-card fade-in">
+            <img src="images/ch-2.png" alt="Chapter 2: Nonlinear Networks" loading="lazy">
+          </a>
+          <a href="chapters/self-awareness.html" class="chapter-card fade-in">
+            <img src="images/ch-3.png" alt="Chapter 3: Self-awareness" loading="lazy">
+          </a>
+          <a href="chapters/digital-age-of-emergence.html" class="chapter-card fade-in">
+            <img src="images/ch-4.png" alt="Chapter 4: Digital Age of Emergence" loading="lazy">
+          </a>
+          <a href="chapters/paradigm-shift.html" class="chapter-card fade-in">
+            <img src="images/ch-5.png" alt="Chapter 5: Paradigm Shift" loading="lazy">
+          </a>
+          <a href="chapters/unified-theory.html" class="chapter-card fade-in">
+            <img src="images/ch-6.png" alt="Chapter 6: Unifying Science, Spirituality & Philosophy" loading="lazy">
+          </a>
+          <a href="chapters/unconditional-love.html" class="chapter-card fade-in">
+            <img src="images/ch-7.png" alt="Chapter 7: The Principle Quality" loading="lazy">
+          </a>
+          <a href="chapters/overview.html" class="chapter-card fade-in">
+            <img src="images/ch-overview.png" alt="Overview" loading="lazy">
+          </a>
+          <a href="chapters/cognitive-energy.html" class="chapter-card fade-in">
+            <img src="images/app-a.png" alt="Appendix A: Cognitive Energy" loading="lazy">
+          </a>
+          <a href="chapters/fractal-dimension.html" class="chapter-card fade-in">
+            <img src="images/app-b.png" alt="Appendix B: The Fractal Dimension" loading="lazy">
+          </a>
+          <a href="chapters/divided-brain.html" class="chapter-card fade-in">
+            <img src="images/app-d.png" alt="Appendix C: The Divided Brain" loading="lazy">
+          </a>
+          <a href="chapters/secret-life-of-chaos.html" class="chapter-card fade-in">
+            <img src="images/app-e.png" alt="Appendix D: Secret Life of Chaos" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Quotes Section -->
-    <section class="section section-dark">
+    <section class="section section-alt">
       <div class="section-wide">
         <div class="section-title fade-in">Voices of a Self-Organizing Universe</div>
         <div class="quotes-grid">
@@ -38,10 +160,6 @@
             <div class="attribution">Iain McGilchrist</div>
           </div>
           <div class="quote-card fade-in">
-            <p>"Humankind has not woven the web of life. We are but one thread within it. Whatever we do to the web, we do to ourselves. All things are bound together. All things connect."</p>
-            <div class="attribution">Ted Perry, inspired by Chief Seattle</div>
-          </div>
-          <div class="quote-card fade-in">
             <p>"The tendency to synchronize is one of the most pervasive drives in the universe, extending from atoms to animals, from people to planets."</p>
             <div class="attribution">Steven Strogatz</div>
           </div>
@@ -50,111 +168,36 @@
             <div class="attribution">Fritjof Capra</div>
           </div>
           <div class="quote-card fade-in">
-            <p>"The human body is an organization in which there is no boss. It is a situation of order resulting from mutual interrelationship of all the parts."</p>
-            <div class="attribution">Alan Watts</div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"We were born for cooperation, like feet, like hands, like eyelids, like the rows of upper and lower teeth. So to work in opposition to one another is against nature."</p>
-            <div class="attribution">Marcus Aurelius</div>
-          </div>
-          <div class="quote-card fade-in">
             <p>"There is more wisdom in your body than in your deepest philosophy."</p>
             <div class="attribution">Friedrich Nietzsche</div>
           </div>
           <div class="quote-card fade-in">
-            <p>"All the examples are variations on the same mathematical theme: self-organization, the spontaneous emergence of order out of chaos."</p>
-            <div class="attribution">Steven Strogatz, <em>Sync</em></div>
-          </div>
-          <div class="quote-card fade-in">
-            <p>"The observation that very different systems can exhibit fundamental similarities is generally referred to as universality, and its apparent validity presents one of the deepest and most powerful mysteries in modern physics."</p>
-            <div class="attribution">Duncan J. Watts</div>
+            <p>"We were born for cooperation, like feet, like hands, like eyelids, like the rows of upper and lower teeth."</p>
+            <div class="attribution">Marcus Aurelius</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Explore Chapters -->
-    <section class="section">
-      <div class="section-wide">
-        <div class="section-title fade-in">Explore the Work</div>
-        <p class="text-center text-muted mb-4 fade-in" style="max-width:600px;margin-left:auto;margin-right:auto;">
-          Discover how humanity can realign with the self-organizing process of the universe through a paradigm shift from linear to nonlinear thinking.
-        </p>
-        <div class="chapters-grid fade-in">
-          <a href="chapters/goal.html" class="chapter-link">
-            <div class="chapter-num">Start Here</div>
-            <div class="chapter-title">Goal</div>
-          </a>
-          <a href="chapters/intro.html" class="chapter-link">
-            <div class="chapter-num">Introduction</div>
-            <div class="chapter-title">A Nonlinear World</div>
-          </a>
-          <a href="chapters/observation.html" class="chapter-link">
-            <div class="chapter-num">Chapter 1</div>
-            <div class="chapter-title">Observation</div>
-          </a>
-          <a href="chapters/nonlinear-networks.html" class="chapter-link">
-            <div class="chapter-num">Chapter 2</div>
-            <div class="chapter-title">Nonlinear Networks</div>
-          </a>
-          <a href="chapters/self-awareness.html" class="chapter-link">
-            <div class="chapter-num">Chapter 3</div>
-            <div class="chapter-title">Self-awareness & the Linear Model</div>
-          </a>
-          <a href="chapters/digital-age-of-emergence.html" class="chapter-link">
-            <div class="chapter-num">Chapter 4</div>
-            <div class="chapter-title">Digital Age of Emergence</div>
-          </a>
-          <a href="chapters/paradigm-shift.html" class="chapter-link">
-            <div class="chapter-num">Chapter 5</div>
-            <div class="chapter-title">Where the Paradigm Shift Begins</div>
-          </a>
-          <a href="chapters/unified-theory.html" class="chapter-link">
-            <div class="chapter-num">Chapter 6</div>
-            <div class="chapter-title">Unifying Science, Spirituality & Philosophy</div>
-          </a>
-          <a href="chapters/unconditional-love.html" class="chapter-link">
-            <div class="chapter-num">Chapter 7</div>
-            <div class="chapter-title">The Principle Quality</div>
-          </a>
-          <a href="chapters/overview.html" class="chapter-link">
-            <div class="chapter-num">Summary</div>
-            <div class="chapter-title">Overview</div>
-          </a>
-          <a href="chapters/cognitive-energy.html" class="chapter-link">
-            <div class="chapter-num">Appendix A</div>
-            <div class="chapter-title">Cognitive Energy</div>
-          </a>
-          <a href="chapters/fractal-dimension.html" class="chapter-link">
-            <div class="chapter-num">Appendix B</div>
-            <div class="chapter-title">The Fractal Dimension</div>
-          </a>
-          <a href="chapters/divided-brain.html" class="chapter-link">
-            <div class="chapter-num">Appendix C</div>
-            <div class="chapter-title">The Divided Brain (McGilchrist)</div>
-          </a>
-          <a href="chapters/secret-life-of-chaos.html" class="chapter-link">
-            <div class="chapter-num">Appendix D</div>
-            <div class="chapter-title">Secret Life of Chaos (Al-Khalili)</div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="section section-dark">
+    <!-- CTA -->
+    <section class="section section-teal">
       <div class="section-narrow text-center fade-in">
-        <h2 class="section-heading">Explore the deep simplicity that governs the universe</h2>
-        <p class="text-muted mb-3">Discover how synchronizing with nature's self-organizing process will unlock humanity's ultimate potential.</p>
+        <h2 class="section-heading" style="color:#fff;">Explore the deep simplicity that governs the universe</h2>
+        <p class="text-muted mb-3">Discover how synchronizing with nature's self-organizing process can unlock humanity's ultimate potential.</p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-          <a href="watch.html" class="btn-outline">Watch the Film</a>
-          <a href="chapters/goal.html" class="btn-primary" style="text-decoration:none;display:inline-block;">Start Reading</a>
+          <a href="watch.html" class="btn-outline" style="border-color:var(--accent);color:var(--accent);">Watch the Film</a>
+          <a href="chapters/goal.html" class="btn-primary" style="background:var(--accent);color:var(--text-primary);text-decoration:none;">Start Reading</a>
         </div>
       </div>
     </section>
   </main>
 
   <div id="site-footer"></div>
+  <script src="js/fluid-bg.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    // Initialize the liquid flow background
+    initFluidBackground('fluidCanvas', 'images/fluid-art.jpg');
+  </script>
 </body>
 </html>

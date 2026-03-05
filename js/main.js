@@ -2,25 +2,23 @@
    Systems Philosophy — Shared Components & Interactions
    ============================================ */
 
-// Chapter data for navigation
 const chapters = [
-  { id: 'goal', label: 'Goal', title: 'Goal', path: '/chapters/goal.html' },
-  { id: 'intro', label: 'Introduction', title: 'Introduction', path: '/chapters/intro.html' },
-  { id: 'observation', label: 'Chapter 1', title: 'Observation', path: '/chapters/observation.html' },
-  { id: 'nonlinear-networks', label: 'Chapter 2', title: 'Nonlinear Networks', path: '/chapters/nonlinear-networks.html' },
-  { id: 'self-awareness', label: 'Chapter 3', title: 'Self-awareness & the Linear Model', path: '/chapters/self-awareness.html' },
-  { id: 'digital-age-of-emergence', label: 'Chapter 4', title: 'Digital Age of Emergence', path: '/chapters/digital-age-of-emergence.html' },
-  { id: 'paradigm-shift', label: 'Chapter 5', title: 'Where the Paradigm Shift Begins', path: '/chapters/paradigm-shift.html' },
-  { id: 'unified-theory', label: 'Chapter 6', title: 'Unifying Science, Spirituality & Philosophy', path: '/chapters/unified-theory.html' },
-  { id: 'unconditional-love', label: 'Chapter 7', title: 'The Principle Quality', path: '/chapters/unconditional-love.html' },
-  { id: 'overview', label: 'Overview', title: 'Overview', path: '/chapters/overview.html' },
-  { id: 'cognitive-energy', label: 'Appendix A', title: 'Cognitive Energy', path: '/chapters/cognitive-energy.html' },
-  { id: 'fractal-dimension', label: 'Appendix B', title: 'The Fractal Dimension', path: '/chapters/fractal-dimension.html' },
-  { id: 'divided-brain', label: 'Appendix C', title: 'The Divided Brain (McGilchrist)', path: '/chapters/divided-brain.html' },
-  { id: 'secret-life-of-chaos', label: 'Appendix D', title: 'Secret Life of Chaos (Al-Khalili)', path: '/chapters/secret-life-of-chaos.html' },
+  { id: 'goal', label: 'Goal', title: 'Goal', path: '/chapters/goal.html', image: 'ch-goal.png' },
+  { id: 'intro', label: 'Introduction', title: 'Introduction', path: '/chapters/intro.html', image: 'ch-intro.png' },
+  { id: 'observation', label: 'Chapter 1', title: 'Observation', path: '/chapters/observation.html', image: 'ch-1.png' },
+  { id: 'nonlinear-networks', label: 'Chapter 2', title: 'Nonlinear Networks', path: '/chapters/nonlinear-networks.html', image: 'ch-2.png' },
+  { id: 'self-awareness', label: 'Chapter 3', title: 'Self-awareness & the Linear Model', path: '/chapters/self-awareness.html', image: 'ch-3.png' },
+  { id: 'digital-age-of-emergence', label: 'Chapter 4', title: 'Digital Age of Emergence', path: '/chapters/digital-age-of-emergence.html', image: 'ch-4.png' },
+  { id: 'paradigm-shift', label: 'Chapter 5', title: 'Where the Paradigm Shift Begins', path: '/chapters/paradigm-shift.html', image: 'ch-5.png' },
+  { id: 'unified-theory', label: 'Chapter 6', title: 'Unifying Science, Spirituality & Philosophy', path: '/chapters/unified-theory.html', image: 'ch-6.png' },
+  { id: 'unconditional-love', label: 'Chapter 7', title: 'The Principle Quality', path: '/chapters/unconditional-love.html', image: 'ch-7.png' },
+  { id: 'overview', label: 'Overview', title: 'Overview', path: '/chapters/overview.html', image: 'ch-overview.png' },
+  { id: 'cognitive-energy', label: 'Appendix A', title: 'Cognitive Energy', path: '/chapters/cognitive-energy.html', image: 'app-a.png' },
+  { id: 'fractal-dimension', label: 'Appendix B', title: 'The Fractal Dimension', path: '/chapters/fractal-dimension.html', image: 'app-b.png' },
+  { id: 'divided-brain', label: 'Appendix C', title: 'The Divided Brain (McGilchrist)', path: '/chapters/divided-brain.html', image: 'app-d.png' },
+  { id: 'secret-life-of-chaos', label: 'Appendix D', title: 'Secret Life of Chaos (Al-Khalili)', path: '/chapters/secret-life-of-chaos.html', image: 'app-e.png' },
 ];
 
-// Detect base path (are we in /chapters/ or root?)
 function getBasePath() {
   const path = window.location.pathname;
   if (path.includes('/chapters/')) return '..';
@@ -41,7 +39,7 @@ function buildHeader() {
 
   const dropdownItems = chapters.map(ch => {
     const href = `${base}${ch.path}`;
-    const active = isActive(ch.path) ? ' style="color:var(--accent)"' : '';
+    const active = isActive(ch.path) ? ' style="color:var(--accent-dark)"' : '';
     if (ch.id === 'overview') {
       return `<div class="dropdown-divider"></div><a href="${href}"${active}>${ch.title}</a>`;
     }
@@ -52,18 +50,18 @@ function buildHeader() {
   }).join('\n');
 
   return `
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <a href="${base}/index.html" class="site-logo">Systems Philosophy</a>
       <nav class="main-nav" id="mainNav">
         <a href="${base}/index.html"${isActive('/index.html') ? ' class="active"' : ''}>Home</a>
         <a href="${base}/watch.html"${isActive('/watch.html') ? ' class="active"' : ''}>Watch</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger">Read</button>
+        <div class="nav-dropdown" id="readDropdown">
+          <button class="nav-dropdown-trigger" id="readTrigger">Read</button>
           <div class="nav-dropdown-menu">
             ${dropdownItems}
             <div class="dropdown-divider"></div>
-            <a href="${base}/inspiration.html"${isActive('/inspiration.html') ? ' style="color:var(--accent)"' : ''}>Additional Inspiration</a>
+            <a href="${base}/inspiration.html"${isActive('/inspiration.html') ? ' style="color:var(--accent-dark)"' : ''}>Additional Inspiration</a>
           </div>
         </div>
         <a href="${base}/about.html"${isActive('/about.html') ? ' class="active"' : ''}>About</a>
@@ -73,7 +71,7 @@ function buildHeader() {
         <a href="mailto:selforgorg@gmail.com" title="Email" aria-label="Email">&#9993;</a>
         <a href="https://instagram.com/selforganizing" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">&#9673;</a>
       </div>
-      <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Menu">
+      <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -108,7 +106,7 @@ function buildFooter() {
           <input type="email" placeholder="Email address" required aria-label="Email address" />
           <button type="submit">Join</button>
         </form>
-        <p class="mt-1" style="font-size:0.78rem;color:var(--text-muted);">We respect your privacy.</p>
+        <p class="mt-1" style="font-size:0.78rem;color:rgba(255,255,255,0.4);">We respect your privacy.</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -126,7 +124,6 @@ function buildChapterNav(currentId) {
   const next = idx < chapters.length - 1 ? chapters[idx + 1] : null;
 
   let html = '<nav class="chapter-nav">';
-
   if (prev) {
     html += `<a href="${base}${prev.path}">
       <div class="nav-label">&larr; Previous</div>
@@ -135,7 +132,6 @@ function buildChapterNav(currentId) {
   } else {
     html += '<span></span>';
   }
-
   if (next) {
     html += `<a href="${base}${next.path}">
       <div class="nav-label">Next &rarr;</div>
@@ -144,78 +140,107 @@ function buildChapterNav(currentId) {
   } else {
     html += '<span></span>';
   }
-
   html += '</nav>';
   return html;
 }
 
-// Initialize
 function init() {
-  // Insert header
+  // Inject header
   const headerEl = document.getElementById('site-header');
   if (headerEl) headerEl.innerHTML = buildHeader();
 
-  // Insert footer
+  // Inject footer
   const footerEl = document.getElementById('site-footer');
   if (footerEl) footerEl.innerHTML = buildFooter();
 
-  // Insert chapter nav
+  // Inject chapter nav
   const chapterNavEl = document.getElementById('chapter-nav');
   if (chapterNavEl) {
     const chapterId = chapterNavEl.dataset.chapter;
     chapterNavEl.innerHTML = buildChapterNav(chapterId);
   }
 
-  // Mobile menu toggle
+  // Mobile hamburger menu
+  setupMobileMenu();
+
+  // Scroll fade-in animations
+  setupScrollAnimations();
+
+  // Header hide/show on scroll
+  setupHeaderScroll();
+}
+
+function setupMobileMenu() {
   const toggle = document.getElementById('mobileToggle');
   const nav = document.getElementById('mainNav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('active');
-      nav.classList.toggle('open');
+  if (!toggle || !nav) return;
+
+  // Hamburger click → open/close nav
+  toggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggle.classList.toggle('active');
+    nav.classList.toggle('open');
+  });
+
+  // Read dropdown toggle (works on both mobile tap and as fallback)
+  const readDropdown = document.getElementById('readDropdown');
+  const readTrigger = document.getElementById('readTrigger');
+  if (readDropdown && readTrigger) {
+    readTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      // On mobile, toggle the dropdown open/closed
+      readDropdown.classList.toggle('open');
     });
   }
 
-  // Mobile dropdown toggles
-  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
-    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-    if (trigger && window.innerWidth <= 768) {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        dropdown.classList.toggle('open');
-      });
-    }
+  // Close menu when clicking a link inside it
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.classList.remove('active');
+      nav.classList.remove('open');
+    });
   });
 
-  // Scroll animations
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+      toggle.classList.remove('active');
+      nav.classList.remove('open');
+    }
+  });
+}
+
+function setupScrollAnimations() {
   const fadeEls = document.querySelectorAll('.fade-in');
-  if (fadeEls.length > 0) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  if (fadeEls.length === 0) return;
 
-    fadeEls.forEach(el => observer.observe(el));
-  }
-
-  // Header hide/show on scroll
-  let lastScroll = 0;
-  const header = document.querySelector('.site-header');
-  if (header) {
-    window.addEventListener('scroll', () => {
-      const current = window.scrollY;
-      if (current > 200 && current > lastScroll) {
-        header.classList.add('hidden');
-      } else {
-        header.classList.remove('hidden');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
-      lastScroll = current;
-    }, { passive: true });
-  }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+}
+
+function setupHeaderScroll() {
+  let lastScroll = 0;
+  const header = document.getElementById('siteHeader');
+  if (!header) return;
+
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    if (current > 200 && current > lastScroll) {
+      header.classList.add('hidden');
+    } else {
+      header.classList.remove('hidden');
+    }
+    lastScroll = current;
+  }, { passive: true });
 }
 
 function handleSubscribe(e) {
