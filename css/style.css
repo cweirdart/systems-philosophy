@@ -833,6 +833,24 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent);
 }
 
+.chapter-figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.chapter-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.chapter-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 /* Chapter Navigation (prev/next) */
 .chapter-nav {
   display: flex;
